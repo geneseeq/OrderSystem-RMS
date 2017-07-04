@@ -1,0 +1,94 @@
+<div class="firstcontiner" ng-controller="LoginController">
+    <div class="row">
+        <div class="col-sm-offset-5 col-sm-5 text-left  animated fadeInUp">
+            <!--注册框-->
+            <!--<div class="form-box" ng-show="signInFlage">-->
+                <!--<div class="form-top">-->
+                    <!--<h1>Sign up</h1>-->
+                <!--</div>-->
+                <!--<div class="form-bottom">-->
+                    <!--<div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="sr-only">账号</label>-->
+                            <!--<input type="text" ng-model="Account" placeholder="账号" class="form-control parsley-error input-lg" id="form-email" data-parsley-type="email"-->
+                                <!--data-parsley-trigger="blur" data-parsley-required="" data-parsley-id="4">-->
+
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="sr-only">密码</label>-->
+                            <!--<input type="password" ng-model="PassWord" placeholder="密码" class="form-control input-lg parsley-error">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="sr-only">Email</label>-->
+                            <!--<input type="email" ng-model="Email" placeholder="Email..." class="form-control input-lg parsley-error">-->
+                        <!--</div>-->
+                        <!--<button type="button" ng-click="sendEmail()" class="btn btn-block sign-up-main btn-success btn-lg animated fadeInDown" ng-show="!sendEmailFlage">-->
+                                     <!--<strong>Send Email</strong>-->
+                                <!--</button>-->
+                        <!--<br>-->
+                        <!--<div ng-show="sendEmailFlage" class="animated fadeInDown">-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="sr-only">验证码</label>-->
+                                <!--<input type="text" ng-model="CodeEmail" placeholder="请输入你邮箱收到的验证码" class="form-control input-lg parsley-error">-->
+                            <!--</div>-->
+                            <!--<button type="submit" ng-click="signUp()" class="btn btn-block sign-up-main btn-success btn-lg">-->
+                                    <!--<strong>Sign Up</strong>-->
+                                <!--</button>-->
+                        <!--</div>-->
+                        <!--<br>-->
+                        <!--<span style="float: right" class="avatarself"><small>Already have an account? <strong><a ng-click="signInFlage=!signInFlage">Sign in</a></strong> instead!</small></span>-->
+                        <!--<br>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--登录-->
+            <div class="form-box" ng-show="!signInFlage">
+                <div class="form-top">
+                    <h1>Sign In</h1>
+                </div>
+                <div class="form-bottom">
+                    <div>
+                        <div class="form-group">
+                            <label class="sr-only">用户名</label>
+                            <input type="text" ng-model="Account" placeholder="账户" class="form-control parsley-error input-lg" id="form-email" data-parsley-type="email"
+                                data-parsley-trigger="blur" data-parsley-required="" data-parsley-id="4">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">密码</label>
+                            <input type="password" ng-model="Pwd" placeholder="密码" class="form-control input-lg parsley-error">
+                        </div>
+                        <div class="animated fadeInDown">
+                            <!--<div class="form-group">
+                                <label class="sr-only">验证码</label>
+                                <input type="text" ng-model="Code" placeholder="请输入验证码" class="form-control input-lg parsley-error">
+                            </div>-->
+                            <button type="submit" ng-click="signIn()" class="btn btn-block sign-up-main btn-success btn-lg">
+                                    <strong>Sign In</strong>
+                                </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div id="result-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" ng-bind='modal.title'></h4>
+                </div>
+                <div class="modal-body">
+                    <p ng-bind='modal.body'></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="hideModel()" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="hideModel()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="serviceContant">
+    <div class="">
+        <h3>
+            订单审核
+        </h3>
+        <jason-pagecontent action="/List/getOrderList" conf='paginationConf'>
+            <div class="panel panel-success">
+                <div class="panel-heading">订单查询
+                </div>
+                <div class="panel-body">
+                    <div class="row form-horizontal">
+                        <div class="col-lg-4 form-groupcol-md-4 form-group">
+                            <label class="col-sm-4 control-label" for="OrderID">
+                                订单ID
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="OrderID" ng-model="f.OrderID">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 form-group col-md-4">
+                            <label class="col-sm-4 control-label" for="OrderType">
+                                项目ID
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="OrderType" ng-model="f.OrderType">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 form-group col-md-4">
+                            <label class="col-sm-4 control-label" for="UserName">
+                                下单人姓名
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="UserName" ng-model="f.UserName">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 form-group col-md-4">
+                            <label class="col-sm-4 control-label" for="OrderType">
+                                订单类型
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="OrderType" ng-model="f.OrderType">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 form-group col-md-4">
+                            <label class="col-sm-4 control-label" for="CheckStatus">
+                                审核状态
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="CheckStatus" ng-model="f.CheckStatus">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 form-group col-md-4">
+                            <label class="col-sm-4 control-label" for="Statues">
+                                订单状态
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="Statues" ng-model="f.Statues">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 form-group col-md-4">
+                            <label class="col-sm-4 control-label" for="ReceiveWayBill">
+                                运单号
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="ReceiveWayBill" ng-model="f.ReceiveWayBill">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 form-group col-md-4">
+                            <button class="btn btn-primary" ng-click="search()">查询</button>
+                            <button class="btn btn-primary" ng-click="cancel()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">订单列表
+                    <!--<span class="btn btn-primary pull-right " style="margin-top:-5px;"  ng-click = 'show=true;add=true;save=false'>-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--新增-->
+                    <!--</span>-->
+                </div>
+                <table class="table table-striped table-bordered table-condensed table-responsive ">
+                    <tr class="animated flash">
+                        <td>选择框</td>
+                        <td>订单ID</td>
+                        <td>项目ID</td>
+                        <td>下单人</td>
+                        <td>订单类型</td>
+                        <td>机构地址</td>
+                        <td>订单状态</td>
+                        <td>审核状态</td>
+                        <td colspan="3" style="width:220px">操作列</td>
+                    </tr>
+                    <tr ng-repeat='iteam in datas|orderBy:"Statues"'>
+                        <td style="text-align: center">
+                            <input type="checkbox" ng-value="iteam._id" ng-checked="all" ng-model="iteam.checked">
+                        </td>
+                        <td>[[iteam.OrderID]]</td>
+                        <td>[[iteam.ProgrameID]]</td>
+                        <td>[[iteam.UserName]]</td>
+                        <td>[[iteam.OrderType|sordertype]]</td>
+                        <td>[[iteam.Instituion]]</td>
+                        <td style="color: red;">[[iteam.Statues]]</td>
+                        <td style="color: red;">[[iteam.CheckStatus]]</td>
+                        <td colspan="3" style="width:220px">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <a class="btn btn-primary" href="#!/orders/orderDetail?OrderID=[[iteam.OrderID]]&type=edit">详情</a>
+                                <a class="btn btn-info" ng-click="updateLine($index,'/orders/orderPass')">通过</a>
+                                <a class="btn btn-warning" ng-click="updateLine($index,'/orders/orderUnapprove')">作废</a>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+                <div style="text-align: center;"><button class="btn btn-info" ng-click="updateMass('/orders/orderPassMass')">批量通过</button> <button class="btn btn-warning" ng-click="updateMass('/orders/orderUnapprovMass')">批量作废</button></div>
+                <jason-pagination conf='paginationConf'></jason-pagination>
+            </div>
+
+        </jason-pagecontent>
+
+    </div>
+</div>

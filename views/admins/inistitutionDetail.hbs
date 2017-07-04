@@ -1,0 +1,91 @@
+<div class="serviceContant" >
+    <div class="container">
+        <h3>
+            机构信息
+        </h3>
+        <jason-pagecontent actionform='/users/getInistitutionDetail' conf='paginationConf'>
+            <div class="panel panel-success">
+                <div class="panel-heading">机构列表
+                </div>
+                <div class="panel-body">
+                    <div class="row form-horizontal">
+                        <fieldset ng-disabled="disabled&&!add">
+                            <div class="form-group ">
+                                <label class="col-sm-2  control-label text-left" for="Country">
+                                     国家
+                                 </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="Country" ng-model="formdata.Country"  />
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-2  control-label text-left" for="Instituion">
+                                     机构（学校/公司/医院）名称
+                                 </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="Instituion" ng-model="formdata.Instituion"  />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="Department">
+                              院系/部门/科室
+                         </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="Department" ng-model="formdata.Department">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="lab">
+                              下单人姓名
+                         </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="lab" ng-model="formdata.lab">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="secondLab">
+                              实验室/二级部门/二级科室
+                         </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="secondLab" ng-model="formdata.secondLab">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="personInCharge">
+                              二级实验室/三级部门/三级科室
+                         </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="personInCharge" ng-model="formdata.personInCharge">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="Memo">
+                              负责人
+                         </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="Memo" ng-model="formdata.Memo" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="ReceiveWayBill">
+                                     备注
+                                  </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="ReceiveWayBill" ng-model="formdata.ReceiveWayBill" />
+                                </div> 
+                            </div>
+                       
+                          
+                        </fieldset>
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary btn-lg" ng-click="changedisabled()" ng-if="disabled&&!add">编辑</button>
+                            <button class="btn btn-primary animated fadeInUp btn-lg" ng-click="baseSave('/users/saveInistitution')" ng-if="!disabled||add">保存</button>
+                            <button class="btn btn-primary btn-lg" ng-click="changedisabled()">取消</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </jason-pagecontent>
+    </div>
+</div>

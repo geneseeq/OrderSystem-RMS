@@ -1,0 +1,99 @@
+<div class="topcontent">
+    <div class="nav-header">
+        <div class="nav-left">
+            <h3>世和基因订单后台管理系统</h3>
+        </div>
+        <div class="nav-right pull-right ">
+            <ul class="nav nav-pills">
+                <li role="presentation" class="avatarself"><a href="#">首页</a></li>
+                <li role="presentation" class="dropdown" ng-class="{true:'open',false:''}[colspanFlage]" ng-click="colspan()">
+                    <a class="dropdown-toggle avatarself" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>[[LoginAccount]]
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#!/admins/baseInfo">基本信息设置</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a ng-click="signOut()">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 main-content">
+                <div class="accordion" id="accordion2">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne">
+                                基本权限
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
+                            <ul class="nav accordion-inner">
+                                <li class="active">
+                                    <a href="#!/List/orderList"><i class="icon-chevron-right"></i> 订单列表</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#!/List/userList"><i class="icon-chevron-right"></i> 用户列表</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseTwo">
+                                高级权限
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse" style="height: 0px; ">
+                            <ul class="nav accordion-inner">
+                                <li class="active">
+                                    <a href="#!/List/orderList"><i class="icon-chevron-right"></i> 修改密码</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#!/List/userList"><i class="icon-chevron-right"></i> 个人信息</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--<ul class="nav nav-list bs-docs-sidenav affix-top">-->
+                    <!--<li class="active">-->
+                        <!--<a href="#!/List/orderList"><i class="icon-chevron-right"></i> 订单列表</a>-->
+                    <!--</li>-->
+                    <!--<li class="active">-->
+                        <!--<a href="#!/List/userList"><i class="icon-chevron-right"></i> 用户列表</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            </div>
+            <div class="col-md-10 col-sm-10 main-content" ng-view="main">
+        </div>
+
+    </div>
+
+
+
+
+    </div>
+    <div id="result-modal-base" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" ng-bind='modal.title'></h4>
+                </div>
+                <div class="modal-body">
+                    <p ng-bind='modal.body'></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="hideModel()" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="hideModel()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center">南京世和基因生物技术有限公司</footer>
+</div>
