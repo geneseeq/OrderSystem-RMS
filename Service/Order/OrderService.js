@@ -5,7 +5,7 @@
  * functionList：['根据ID获取订单','获取自己所有的订单','管理员获取所有的订单信息'，'新增订单','修改订单']
  * 
  */
-var Order = require('../../Modles/OrderLists.js');
+var Order = require('../../Modles/orderLists.js');
 var Sample = require('../../Modles/Samples.js');
 //根据ID获取订单
 exports.GetOrderByID = function(data, callBack) {
