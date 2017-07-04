@@ -1,0 +1,11 @@
+# Include your project-specific ignores in this file
+# Dependency directories
+node_modules
+bower_components
+#log
+*.log
+
+bundle.js
+out
+.vscode
+.idea
