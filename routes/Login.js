@@ -9,22 +9,6 @@ router.get('/', function(req, res, next) {
     });
 });
 
-//注册
-// router.post("/SignUp", function(req, res, next) {
-//     var resultData = {};
-//     if (req.session.codeEmail == req.body.Code) {
-//         userService.SignUp(req.body, function(flage, msg) {
-//             resultData.isSuccess = flage;
-//             resultData.msg = msg;
-//             return res.json(resultData);
-//         });
-//     } else {
-//         resultData.isSuccess = false;
-//         resultData.msg = "验证码不正确!";
-//         return res.json(resultData);
-//     }
-// });
-
 router.post('/SignUp',function (req,res,next) {
     adminService.SignUp(req,function (isSuccess,data) {
         var resultData = {};

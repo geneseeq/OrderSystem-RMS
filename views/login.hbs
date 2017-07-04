@@ -1,0 +1,68 @@
+<div class="bg"></div>
+<div class="topcontent">
+    <div class="nav-header">
+        <div class="nav-left">
+            <h3>世和基因订单后台管理系统</h3>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="firstcontiner" ng-controller="LoginController">
+
+                <div class="row" style="padding: 60px 0;">
+                    <div class="col-sm-offset-4 col-sm-4 text-center  animated fadeInUp">
+                        <div class="form-box" ng-show="!signInFlage">
+                            <div class="form-top">
+                                <h1>Sign In</h1>
+                            </div>
+                            <div class="form-bottom">
+                                <div>
+                                    <div class="form-group">
+                                        <label class="sr-only">用户名</label>
+                                        <input type="text" ng-model="Account" placeholder="账户" class="form-control parsley-error input-lg" id="form-email" data-parsley-type="email"
+                                               data-parsley-trigger="blur" data-parsley-required="" data-parsley-id="4">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only">密码</label>
+                                        <input type="password" ng-model="Pwd" placeholder="密码" class="form-control input-lg parsley-error">
+                                    </div>
+                                    <div class="animated fadeInDown">
+                                        <button type="submit" ng-click="signIn()" class="btn btn-block sign-up-main btn-success btn-lg">
+                                            <strong>Sign In</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div id="result-modal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" ng-bind='modal.title'></h4>
+                            </div>
+                            <div class="modal-body">
+                                <p ng-bind='modal.body'></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" ng-click="hideModel()" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" ng-click="hideModel()">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+    <footer class="text-center">南京世和基因生物技术有限公司</footer>
+</div>

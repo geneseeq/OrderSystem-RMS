@@ -191,3 +191,10 @@ p{
 .main-content{
     padding-top:30px;
 }
+
+.bg {
+    background-image: url(../img/microscope.png);
+    position: fixed;
+    width:100vw;
+    height: 100vh;
+}

@@ -6,9 +6,7 @@ var adminService = require('../Service/Admin/AdminService.js');
 
 //跳转到基本信息页面
 router.get('/baseInfo', function(req, res, next) {
-    res.render('admins/baseInfo', {
-        layout: null
-    });
+    res.render('admins/baseInfo');
 });
 //跳转到基本信息页面
 router.get('/address', function(req, res, next) {
@@ -108,23 +106,23 @@ router.get('/getAddressList', function(req, res, next) {
 });
 //将地址设为默认
 router.post('/setAddressDefault', function(req, res, next) {
-        address.setDefault(req, function(issucess, data) {
-            resultData = data;
-            resultData.dataNum = data.count;
-            resultData.data = data.result;
-            return res.json(resultData);
-        });
-    })
-    //删除地址
+    address.setDefault(req, function(issucess, data) {
+        resultData = data;
+        resultData.dataNum = data.count;
+        resultData.data = data.result;
+        return res.json(resultData);
+    });
+})
+//删除地址
 router.post('/deleteAddress', function(req, res, next) {
-        address.delete(req, function(issucess, data) {
-            resultData = data;
-            resultData.dataNum = data.count;
-            resultData.data = data.result;
-            return res.json(resultData);
-        })
+    address.delete(req, function(issucess, data) {
+        resultData = data;
+        resultData.dataNum = data.count;
+        resultData.data = data.result;
+        return res.json(resultData);
     })
-    //编辑查看
+})
+//编辑查看
 router.post('/checkAddress', function(req, res, next) {
     address.find(req, function(issucess, data) {
         resultData = data;

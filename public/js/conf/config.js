@@ -179,7 +179,7 @@ myApp.config(function($routeProvider, $interpolateProvider) {
         localStorage.setItem('mx_key', "");
         localStorage.setItem('mx_key', "");
         localStorage.setItem('backurl', "/index/main");
-        window.location.reload();
+        window.location.href='/';
         // $location.path('/index/main?backurl=' + $location.path());
         // window.location.load = window.location.origin + window.location.pathname + '#!/index/main?backurl=' + $location.path();
     }

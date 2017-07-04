@@ -12,10 +12,4 @@ router.get('/', function(req, res, next) {
 router.get('/main', function(req, res, next) {
     res.render('main', { title: '首页', layout: null });
 });
-router.get('/serviceInfo', function(req, res, next) {
-    res.render('serviceInfo', { title: '高通量测序服务', layout: null });
-});
-router.get('/serviceList', function(req, res, next) {
-    res.render('serviceList', { title: '高通量测序服务', layout: null });
-});
 module.exports = router;

@@ -28,6 +28,7 @@ myApp.controller('LoginController', function($scope, $http, $q, $location) {
 
     //登录
     $scope.signIn = function() {
+        console.log('login');
         $http({
             method: 'post',
             url: '/Login/SignIn',
@@ -37,21 +38,18 @@ myApp.controller('LoginController', function($scope, $http, $q, $location) {
                 Code: $scope.Code
             }
         }).then(function(data) {
+            console.log(data);
             $scope.modal.title = "登录结果";
             data = data && data.data ? data.data : data;
             $scope.modal.body = data.msg;
             if (data.isSuccess == true) {
-                //$scope.$emit('transfer.IsLogin', data.isSuccess);
-                // $scope.$emit('transfer.LoginAccount', data.Account);
-                //$scope.IsLogin = data.IsLogin;
-                //$scope.LoginAccount = data.Account;
                 localStorage.setItem('IsLogin', data.isSuccess);
                 localStorage.setItem('LoginAccount', data.Account);
                 localStorage.setItem('mx_token', data.access_token);
                 localStorage.setItem('mx_key', data.Account);
                 var backurl = $location.$$search.backurl ? $location.$$search.backurl : "/admins/baseInfo";
                 localStorage.setItem('backurl', backurl);
-                window.location.reload();
+                window.location.href='/index#!/admins/baseInfo?'+accesstokenstring;
             } else {
                 $("#result-modal").modal();
             }
