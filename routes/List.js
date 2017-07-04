@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var orderService = require('../Service/Order/orderService.js');
+var orderService = require('../Service/Order/OrderService.js');
 
 /* GET List. */
 router.get('/orderList', function(req, res, next) {
