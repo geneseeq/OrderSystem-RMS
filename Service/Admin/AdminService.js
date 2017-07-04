@@ -13,7 +13,9 @@ var Admin = require('../../Modles/Admin.js');
 //     })
 // }
 exports.SignIn = function(data, callBack) {
+    console.log(data.Account+data.PassWord);
     Admin.fetch({ Account: data.Account, Pwd: data.PassWord }).then(function(result) {
+        console.log(result);
         if (result && result.length > 0) {
             callBack(true, "登录成功");
         } else {
