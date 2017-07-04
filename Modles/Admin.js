@@ -42,7 +42,7 @@ module.exports = {
             .exec();
     },
     getSingleUser: function getSingleUser(data) {
-        return User
+        return Admin
             .findOne(data)
             .addCreatedAt()
             .exec();
