@@ -33,7 +33,7 @@ module.exports = {
 
         return Admin.update({ _id: adminID }, { $set: data }).exec();
     },
-    user: exoprtAdmin,
+    admin: exoprtAdmin,
     // 通过用户名获取用户信息
     getAdminByName: function getAdminByName(name) {
         return Admin

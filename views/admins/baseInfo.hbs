@@ -33,12 +33,12 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Phone" class="col-sm-2 controll-label">地址：</label>
-                        <div class="col-sm-10">
-                            <input type="text" ng-model="formdata.Address" placeholder="地址" class="input-lg " required ng-required="true" />
-                        </div>
-                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label for="Phone" class="col-sm-2 controll-label">地址：</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<input type="text" ng-model="formdata.Address" placeholder="地址" class="input-lg " required ng-required="true" />-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </form>
                 <div class="form-horizontal base-info-form animated bounceInDown" ng-if="disabled">
                     <div class="form-group">
@@ -57,14 +57,14 @@
                         <label for="Phone" class="col-sm-2 controll-label">电话</label>
                         <label for="Account" class="col-sm-10 controll-label">[[formdata.Phone]]</label>
                     </div>
-                    <div class="form-group">
-                        <label for="Phone" class="col-sm-2 controll-label">地址：</label>
-                        <label for="Account" class="col-sm-10 controll-label">[[formdata.Address]]</label>
-                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label for="Phone" class="col-sm-2 controll-label">地址：</label>-->
+                        <!--<label for="Account" class="col-sm-10 controll-label">[[formdata.Address]]</label>-->
+                    <!--</div>-->
                 </div>
                 <div class="form-group text-center">
                     <button class="btn btn-primary btn-lg" ng-click="changedisabled()" ng-if="disabled">编辑</button>
-                    <button class="btn btn-primary animated fadeInUp btn-lg" ng-click="baseSave('/users/changeUserInfo')" ng-if="!disabled">保存</button>
+                    <button class="btn btn-primary animated fadeInUp btn-lg" ng-click="baseSave('/admins/changeAdminInfo')" ng-if="!disabled">保存</button>
                     <button class="btn btn-primary btn-lg" ng-click="changedisabled()">取消</button>
                 </div>
                 <div id="code" class="animated pulse">

@@ -42,7 +42,7 @@ myApp.config(function($routeProvider, $interpolateProvider) {
             templateUrl: '/orders/printOrder?' + accesstokenstring
         })
         .otherwise({
-            redirectTo: '/index/main'
+            // redirectTo: '/index/main'
         })
 
 }).controller('baseController', function($rootScope, $scope, $http, $q, $location) {
@@ -55,6 +55,7 @@ myApp.config(function($routeProvider, $interpolateProvider) {
         actionform: ""
     };
     $scope.f = {};
+    $scope.remark = {};
     $scope.colspanFlage = false;
     $scope.disabled = true;
     $scope.IsLogin = localStorage.getItem('IsLogin') == "true";
@@ -97,6 +98,8 @@ myApp.config(function($routeProvider, $interpolateProvider) {
     }
     $scope.updateLine = function(index, action) {
         $scope.currentData = $scope.datas[index];
+        $scope.currentData.feedback = $scope.remark.feedback;
+        $scope.currentData.checksuggestion = $scope.remark.checksuggestion;
         var urlconnect = action.indexOf("?") > 0 ? "&" : "?";
         $http({
             method: 'post',
@@ -109,7 +112,7 @@ myApp.config(function($routeProvider, $interpolateProvider) {
             data = data && data.data ? data.data : data;
             $scope.modal.body = data.msg || data.data;
             $("#result-modal-base").modal();
-            window.location.reload()
+            pageInit();
         })
     }
     $scope.updateMass = function (action) {
@@ -131,7 +134,7 @@ myApp.config(function($routeProvider, $interpolateProvider) {
             data = data && data.data ? data.data : data;
             $scope.modal.body = data.msg || data.data;
             $("#result-modal-base").modal();
-            window.location.reload();
+            pageInit();
         })
     }
 
@@ -186,6 +189,7 @@ myApp.config(function($routeProvider, $interpolateProvider) {
     $scope.hideModel = function() {
         $("#result-modal").modal('hide');
         $("#result-modal-base").modal('hide');
+        $("#result-modal-remark").modal('hide');
         $scope.signInFlage = !$scope.signInFlage;
         $location.path().indexOf('index/main') > 0 ? window.location.reload() : "";
         $location.path().indexOf('users/baseInfo') > 0 ? window.location.reload() : "";
@@ -202,6 +206,10 @@ myApp.config(function($routeProvider, $interpolateProvider) {
             actionform: ""
         };
         $scope.f = {};
+    }
+    $scope.operate = function (index) {
+        $("#result-modal-remark").modal();
+        $scope.index =index;
     }
     $rootScope.$on('$locationChangeSuccess', function() {　　　　
         $scope.refresh();

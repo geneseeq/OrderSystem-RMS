@@ -145,12 +145,37 @@ myApp.controller('orderDetailController', function($scope, FileUploader, $http, 
             }
         }
     }
-
-
+    
 
     $scope.addAttachment = function() {
         $("#jsonuploadfile").click();
     }
+    $scope.operate = function () {
+        $("#result-modal-remark").modal();
+    }
+    $scope.updateLine = function(action) {
+        $scope.detail.feedback = $scope.remark.feedback;
+        $scope.detail.checksuggestion = $scope.remark.checksuggestion;
+        var urlconnect = action.indexOf("?") > 0 ? "&" : "?";
+        $http({
+            method: 'post',
+            url: action + urlconnect + accesstokenstring,
+            data: {
+                formdata: $scope.detail
+            }
+        }).then(function(data) {
+            $scope.modal.title = "结果";
+            data = data && data.data ? data.data : data;
+            $scope.modal.body = data.msg || data.data;
+            $("#result-modal-remark").on('hidden.bs.modal',function (e) {
+                window.location.href='#!/List/orderList';
+            })
+            $("#result-modal-remark").modal('hide');
+
+        })
+    }
+
+    
     var uploader = $scope.uploader = new FileUploader({
         url: 'upload.php'
     });

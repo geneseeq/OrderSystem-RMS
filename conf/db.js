@@ -47,4 +47,18 @@
          return result;
      }
  });
+ mongolass.plugin('addId', {
+     afterFind: function(results) {
+         results.forEach(function(item) {
+             item.IDI = parseInt(item.OrderID)-2000000;
+         });
+         return results;
+     },
+     afterFindOne: function(result) {
+         if (result) {
+             result.IDI =parseInt(item.OrderID)-2000000;
+         }
+         return result;
+     }
+ });
  exports.mongolass = mongolass;

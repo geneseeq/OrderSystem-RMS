@@ -23,7 +23,6 @@ exports.GetOrderLists = function(data, callBack) {
         for (var key in fetchParam) {
             orderCriteria[key] = new RegExp(fetchParam[key]);
         }
-    var orderCriteria = {};
         Order.fetch(orderCriteria, limitnum, skipnum).then(function(result) {
             if (result && result.length) {
                 Order.getCount(orderCriteria).then(function(count) {
@@ -38,8 +37,8 @@ exports.GetOrderLists = function(data, callBack) {
     //获取所在分组的订单，所在组的组长可看 ps:实验室管理员,公司负责人
 exports.GetOrderListsByGroup = function(data, callBack) {
 
-    }
-    //管理员获取所有的订单信息
+}
+//管理员获取所有的订单信息
 exports.GetOrderListsByAdmin = function(data, callBack) {
 
 }
@@ -113,7 +112,13 @@ exports.GetOrderDetail = function(data, callBack) {
 exports.setOrderPass = function (data,callBack) {
     var OrderId = data.body.formdata._id;
     var CheckUser = data.session.Account ? data.session.Account : "";
-    var OrderPass = {Statues:'已审核',CheckStatus:'审核通过',CheckUser:CheckUser};
+    var OrderPass = data.body.formdata;
+    OrderPass.Statues = '已审核';
+    OrderPass.CheckStatus='审核通过';
+    OrderPass.CheckUser=CheckUser;
+    OrderPass.checkTime= new Date();
+    delete OrderPass.CreateTime;
+    console.log(OrderPass);
     Order.updateOneByID(OrderId,OrderPass).then(function (result) {
         if (result && result.result && result.result.ok == 1) {
             callBack(true, "修改成功");
@@ -125,7 +130,13 @@ exports.setOrderPass = function (data,callBack) {
 exports.setOrderUnapprove = function (data,callBack) {
     var OrderId = data.body.formdata._id;
     var CheckUser = data.session.Account ? data.session.Account : "";
-    var OrderPass = {Statues:'已审核',CheckStatus:'审核未通过',CheckUser:CheckUser};
+    var OrderPass = data.body.formdata;
+    OrderPass.Statues = '已审核';
+    OrderPass.CheckStatus='审核未通过';
+    OrderPass.CheckUser=CheckUser;
+    OrderPass.checkTime= new Date();
+    delete OrderPass.CreateTime;
+    console.log(OrderPass);
     Order.updateOneByID(OrderId,OrderPass).then(function (result) {
         if (result && result.result && result.result.ok == 1) {
             callBack(true, "修改成功");

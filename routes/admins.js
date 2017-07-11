@@ -26,7 +26,7 @@ router.get('/getAdminInfo', function(req, res, next) {
 //修改基本信息
 router.post('/changeAdminInfo', function(req, res, next) {
     var resultData = {};
-    AdminService.updateAdmin(req, function(issucess, data) {
+    adminService.updateAdmin(req, function(issucess, data) {
 
         resultData.data = data;
         return res.json(resultData);
