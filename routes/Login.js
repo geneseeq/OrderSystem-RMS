@@ -24,12 +24,15 @@ router.post("/SignIn", function(req, res, next) {
     if (true || req.session.codeEmail == req.body.Code) {
         adminService.SignIn(req.body, function(flage, msg) {
             resultData.isSuccess = flage;
-            resultData.msg = msg;
+            resultData.msg = msg.msg;
+            resultData.Phone=msg.Phone;
             resultData.backurl = req.backurl;
+            resultData.UserName=msg.UserName;
             if (flage) {
                 req.session.Account = req.body.Account;
                 req.session.IsLogin = true;
                 resultData.Account = req.body.Account;
+                
                 return res.json(Object.assign({}, jwtHelper.genToken(resultData), resultData));
             }
             return res.json(resultData);

@@ -8,6 +8,7 @@ var routers = require('./routes/routers');
 var session = require('express-session');
 var app = express();
 var apiAuth = require("./utils/Validauth");
+var MongoStore = require('connect-mongo')(session);
 //避免dot-hell
 global.appRequire = function(path) {
         return require(path.resolve(__dirname, path));
@@ -31,6 +32,14 @@ app.use(session({
     },
     resave: false,
     saveUninitialized: true,
+    store: new MongoStore({   //创建新的mongodb数据库
+        host: '127.0.0.1',    //数据库的地址，本机的话就是127.0.0.1，也可以是网络主机
+        port: 27017,          //数据库的端口号
+        url: 'mongodb://127.0.0.1:27017/orderSystem'  ,
+        db: 'orderSystem',        //数据库的名称。
+        cookieSecret: 'orderSystem',
+        mongodb: "mongodb://127.0.0.1:27017/orderSystem"
+     })
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 

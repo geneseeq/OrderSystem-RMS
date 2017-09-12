@@ -11,7 +11,7 @@ var config = require('../conf/config');
 var logger = require('./loghelper').helper;
 
 module.exports = function(req, res, next) {
-    if (req.url === '/' || req.url.indexOf('/Login') > -1 || req.url.indexOf('/serviceDetail') > -1 || req.url.indexOf('/js/') > -1 || req.url.indexOf('/css/') > -1 || req.url.indexOf('/img/') > -1 || req.url.indexOf('/fonts/') > -1 || req.url.indexOf('/index') > -1 || req.url === '/index/main') {
+    if (req.url === '/' || req.url.indexOf('/Login') > -1 || req.url.indexOf('/serviceDetail') > -1 || req.url.indexOf('/js/') > -1 || req.url.indexOf('/css/') > -1 || req.url.indexOf('/img/') > -1 || req.url.indexOf('/fonts/') > -1 || req.url.indexOf('/index') > -1 || req.url === '/index/main'|| req.url.indexOf("pdfOrder")>-1) {
         next();
     } else {
         var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
@@ -40,9 +40,20 @@ module.exports = function(req, res, next) {
                     };
                     res.render("error", error);
                     return;
-                } else {
-                    next();
+                } 
+                if(!req.session.Account){
+                    var error = {
+                        "status": 401,
+                        "message": "未登录，提供鉴权Token!",
+                        "backurl": url,
+                        layout:false
+        
+                    };
+                    res.render("error", error);
+                    return;
                 }
+                 next();
+                
             } catch (err) {
                 var error = {
                     "status": 500,

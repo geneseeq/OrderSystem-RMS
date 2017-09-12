@@ -7,22 +7,21 @@
  */
 var Order = require('../../Modles/orderLists.js');
 var Sample = require('../../Modles/Samples.js');
-//根据ID获取订单
-exports.GetOrderByID = function(data, callBack) {
+var Attachment=require('../../Modles/OrderAttachment.js');
 
-    }
-    //获取自己所有订单
+//获取所有订单
 exports.GetOrderLists = function(data, callBack) {
         let pageSize = data.query.pagesize;
         let pageIndex = data.query.pageindex;
         let skipnum = pageSize * (pageIndex - 1);
         let limitnum = parseInt(pageSize);
         let fetchParam = new Order.order(JSON.parse(data.query.f));
-
+        fetchParam.IsSubmit="1";
         var orderCriteria = {};
         for (var key in fetchParam) {
-            orderCriteria[key] = new RegExp(fetchParam[key]);
+            fetchParam[key]!==""?orderCriteria[key] = new RegExp(fetchParam[key]):"";
         }
+        delete orderCriteria.CreateTime;
         Order.fetch(orderCriteria, limitnum, skipnum).then(function(result) {
             if (result && result.length) {
                 Order.getCount(orderCriteria).then(function(count) {
@@ -35,51 +34,9 @@ exports.GetOrderLists = function(data, callBack) {
         }.bind(this))
     }
     //获取所在分组的订单，所在组的组长可看 ps:实验室管理员,公司负责人
-exports.GetOrderListsByGroup = function(data, callBack) {
 
-}
-//管理员获取所有的订单信息
-exports.GetOrderListsByAdmin = function(data, callBack) {
 
-}
 
-function AddSample(sampleLists, OrderID) {
-    sampleLists.map(function(samp) {
-        samp.OrderID = OrderID;
-        samp._id ? Sample.updateOneByID(samp._id, new Sample.sample(samp)) : Sample.create(new Sample.sample(samp))
-    });
-
-}
-//新增订单
-exports.AddOrder = function(data, callBack) {
-    var orderp = new Order.order(data.body.detail);
-    orderp.UserID = data.session.Account ? data.session.Account : ""
-    if (data.body.detail._id) {
-        Order.updateOneByID(data.body.detail._id, orderp).then(function(result) {
-            if (result && result.result && result.result.ok == 1) {
-                callBack(true, "修改成功");
-                //添加样本
-                AddSample(data.body.detail.samples, data.body.detail.OrderID);
-            } else {
-                callBack(false, "新增失败");
-            }
-        }.bind(this))
-    } else {
-        Order.create(orderp).then(function(result) {
-            if (result && result.result && result.result.ok == 1) {
-                callBack(true, "新增成功");
-                let orderidinsert = data.body.detail.OrderID;
-                result.insertedIds[0].id.map(function(value) {
-                    orderidinsert += value.toString(16);
-                })
-                AddSample(data.body.detail.samples, orderidinsert);
-
-            } else {
-                callBack(false, "新增失败");
-            }
-        }.bind(this))
-    }
-}
 
 //修改订单
 exports.Update = function(data, callBack) {
@@ -93,17 +50,19 @@ exports.Update = function(data, callBack) {
         }
     })
 }
+//获取订单明细
 exports.GetOrderDetail = function(data, callBack) {
-    var OrderID = data.query.OrderID;
+    let OrderID = data.query.OrderID;
+    
     Order.getOrderByID(OrderID).then(function(result) {
         if (result && result._id) {
-            Sample.fetch({ 'OrderID': result.OrderID }).then(function(samples) {
+            Sample.fetch({ 'OrderID': result.OrderID}).then(function(samples) {
                 result.samples = samples;
-                callBack(true, result);
-
+                Attachment.fetch({'OrderID': result.OrderID}).then(function(Attachments){
+                    result.Attachments=Attachments;
+                    callBack(true, result);
+                });
             });
-
-
         } else {
             callBack(false, result);
         }
@@ -113,8 +72,8 @@ exports.setOrderPass = function (data,callBack) {
     var OrderId = data.body.formdata._id;
     var CheckUser = data.session.Account ? data.session.Account : "";
     var OrderPass = data.body.formdata;
-    OrderPass.Statues = '已审核';
-    OrderPass.CheckStatus='审核通过';
+    OrderPass.Statues = '1';
+    OrderPass.CheckStatus='1';
     OrderPass.CheckUser=CheckUser;
     OrderPass.checkTime= new Date();
     delete OrderPass.CreateTime;
@@ -131,45 +90,14 @@ exports.setOrderUnapprove = function (data,callBack) {
     var OrderId = data.body.formdata._id;
     var CheckUser = data.session.Account ? data.session.Account : "";
     var OrderPass = data.body.formdata;
-    OrderPass.Statues = '已审核';
-    OrderPass.CheckStatus='审核未通过';
+    OrderPass.Statues = '2';
+    OrderPass.CheckStatus='2';
+    OrderPass.IsSubmit="0";
     OrderPass.CheckUser=CheckUser;
     OrderPass.checkTime= new Date();
     delete OrderPass.CreateTime;
     console.log(OrderPass);
     Order.updateOneByID(OrderId,OrderPass).then(function (result) {
-        if (result && result.result && result.result.ok == 1) {
-            callBack(true, "修改成功");
-        } else {
-            callBack(false, "新增失败");
-        }
-    })
-}
-exports.setOrderPassMass = function (data,callBack) {
-    var updataId = data.body.updataId;
-    var OrderId = [];
-    for(let i=0;i<updataId.length;i++){
-        OrderId.push({_id:updataId[i]})
-    }
-    var CheckUser = data.session.Account ? data.session.Account : "";
-    var OrderPass = {Statues:'已审核',CheckStatus:'审核通过',CheckUser:CheckUser};
-    Order.updateInfo(OrderId,OrderPass).then(function (result) {
-        if (result && result.result && result.result.ok == 1) {
-            callBack(true, "修改成功");
-        } else {
-            callBack(false, "新增失败");
-        }
-    })
-}
-exports.setOrderUnapprovMass = function (data,callBack) {
-    var updataId = data.body.updataId;
-    var OrderId = [];
-    for(let i=0;i<updataId.length;i++){
-        OrderId.push({_id:updataId[i]})
-    }
-    var CheckUser = data.session.Account ? data.session.Account : "";
-    var OrderPass = {Statues:'已审核',CheckStatus:'审核未通过',CheckUser:CheckUser};
-    Order.updateInfo(OrderId,OrderPass).then(function (result) {
         if (result && result.result && result.result.ok == 1) {
             callBack(true, "修改成功");
         } else {

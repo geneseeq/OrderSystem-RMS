@@ -98,10 +98,10 @@
                         <td>[[iteam.OrderID]]</td>
                         <td>[[iteam.ProgrameID]]</td>
                         <td>[[iteam.UserID]]</td>
-                        <td>[[iteam.OrderType|sordertype]]</td>
-                        <td>[[iteam.Instituion]]</td>
-                        <td style="color: red;">[[iteam.Statues]]</td>
-                        <td style="color: red;">[[iteam.CheckStatus]]</td>
+                        <td>[[ ["文库无需世和混合，包lane","文库需世和混合上机，包lane","需要世和混合上机，不包lane包G","文库无需世和混合，包FC(flow cell)"][iteam.OrderType] ]]</td>
+                        <td>[[iteam.InstituionString]]</td>
+                        <td style="color: red;">[[iteam.Statues|status]]</td>
+                        <td style="color: red;">[[iteam.CheckStatus|status]]</td>
                         <td colspan="3" style="width:220px">
                             <div class="btn-group" role="group" aria-label="...">
                                 <a class="btn btn-primary" href="#!/orders/orderDetail?OrderID=[[iteam.OrderID]]&type=edit">详情</a>

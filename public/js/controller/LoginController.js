@@ -34,7 +34,7 @@ myApp.controller('LoginController', function($scope, $http, $q, $location) {
             url: '/Login/SignIn',
             data: {
                 Account: $scope.Account,
-                PassWord: $scope.Pwd,
+                PassWord: md5($scope.Pwd),
                 Code: $scope.Code
             }
         }).then(function(data) {

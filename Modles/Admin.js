@@ -6,15 +6,29 @@ let Admin = mongolass.model('Admin', {
     Pwd: { type: "string" },
     Phone: { type: "string" },
     Memo: { type: "string" },
-    CreateTime: new Date()
+    CreateTime: new Date(),
+    CreateUserID: { type: "string" },
+    EditUserID: { type: "string" },
+    EditUserTime: { type: "string" },
+    IsActive: { type: "string" },
+    Email: { type: "string" },
+    Address: { type: "string" },
+    salt: { type: "string" }
 });
 let exoprtAdmin = function(admin) {
-    this.Account = admin.Account ? admin.Account : "";
-    this.UserName = admin.UserName ? admin.UserName : "";
-    this.Pwd = admin.Pwd ? admin.Pwd : "";
-    this.Phone = admin.Phone ? admin.Phone : "";
-    this.Memo = admin.Memo ? admin.Memo : "";
+    this.Account = user.Account ? user.Account : "";
+    this.UserName = user.UserName ? user.UserName : "";
+    this.Pwd = user.Pwd ? user.Pwd : "";
+    this.Phone = user.Phone ? user.Phone : "";
+    this.Memo = user.Memo ? user.Memo : "";
     this.CreateTime = new Date();
+    this.CreateUserID = user.CreateUserID ? user.CreateUserID : "";
+    this.EditUserID = user.EditUserID ? user.EditUserID : "";
+    this.EditUserTime = user.EditUserTime ? user.EditUserTime : "";
+    this.IsActive = user.IsActive ? user.IsActive : "";
+    this.Email = user.Email ? user.Email : "";
+    this.Address = user.Address ? user.Address : "";
+    this.salt = user.salt ? user.salt : "";
 }
 module.exports = {
     // 注册一个用户
@@ -46,5 +60,8 @@ module.exports = {
             .findOne(data)
             .addCreatedAt()
             .exec();
-    }
+    },
+    updateOneByName: function updateOneByID(Name, data) {
+                return Admin.update({ Account: Name }, { $set: data }).exec();
+    },
 };

@@ -41,6 +41,9 @@ myApp.config(function($routeProvider, $interpolateProvider) {
         .when('/orders/printOrder', {
             templateUrl: '/orders/printOrder?' + accesstokenstring
         })
+        .when('/admins/password', {
+            templateUrl: '/admins/password?' + accesstokenstring
+        })
         .otherwise({
             // redirectTo: '/index/main'
         })

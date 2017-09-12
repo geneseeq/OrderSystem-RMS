@@ -1,386 +1,134 @@
-<div class="serviceContant" ng-controller="orderDetailController" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-    <div class="">
-        <h3>
-            订单明细
-        </h3>
-        <div action='/orders/getList' conf='paginationConf'>
-            <div class="panel panel-success">
-                <div class="panel-heading">订单查询
-                </div>
-                <div class="panel-body">
-                    <div class="row form-horizontal">
-                        <fieldset ng-disabled="disabled">
-                            <div class="form-group ">
-                                <label class="col-sm-2  control-label text-left" for="OrderID">
-                                     订单编号
-                                 </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="OrderID" ng-model="detail.OrderID" ng-disabled="!add" />
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label class="col-sm-2  control-label text-left" for="ProgrameID">
-                                     项目编号
-                                 </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="ProgrameID" ng-model="detail.ProgrameID" ng-disabled="!add" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="OrderType">
-                              订单类型
-                                   </label>
-                                <div class="col-sm-8">
-                                    <div><input type="radio" name="orderType" ng-ckecked="detail.OrderType==1" ng-model="detail.OrderType" value="1">已构建的文库（需要世和混样）</div>
-                                    <div class=""><input type="radio" ng-ckecked="detail.OrderType==2" name="orderType" ng-model="detail.OrderType" value="2">已构建的文库（不需要世和混样）</div>
-                                    <div class=""><input type="radio"  ng-ckecked="detail.OrderType==3" name="orderType" ng-model="detail.OrderType" value="3">自定义:需要世和协助-请单独和相关负责人联系</div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="Instituion">
-                               机构
-                                </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="Instituion" ng-model="detail.Instituion" ng-disabled="!add" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveAddress">
-                              收货地址
-                               </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="ReceiveAddress" ng-model="detail.ReceiveAddress" ng-disabled="!add" />
-
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveWayBill">
-                                     运单号
-                                  </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="ReceiveWayBill" ng-model="detail.ReceiveWayBill" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveWayType">
-                                     运输方式：
-                                  </label>
-                                <div class="col-sm-8">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" ng-checked="detail.ReceiveWayType==1" ng-model="detail.ReceiveWayType" value="1">干冰+冰袋(推荐使用)
-                                        </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" ng-checked="detail.ReceiveWayType==2" ng-model="detail.ReceiveWayType" value="2">冰袋(推荐使用
-                                        </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" ng-checked="detail.ReceiveWayType==3" ng-model="detail.ReceiveWayType" value="3"> 液氮
-                                        </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" ng-checked="detail.ReceiveWayType==4" ng-model="detail.ReceiveWayType" value="4"> 其他
-                                        </label>
-                                    <input ng-show="detail.ReceiveWayType == '4'" class="form-control" type="text" id="ReceiveWayTypeString" ng-model="detail.ReceiveWayTypeString"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveWayBill">
-                                     是否携带硬盘
-                                  </label>
-                                <div class="col-sm-8">
-                                    <label class="radio-inline">
-                                <input type="radio" name="CarryDisk" ng-ckecked="detail.CarryDisk==1"  ng-model="detail.CarryDisk" value="1">是
-                                </label>
-                                    <label class="radio-inline">
-                                <input type="radio" name="CarryDisk" ng-ckecked="detail.CarryDisk==2" ng-model="detail.CarryDisk" value="2">否
-                                </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input class="sr-only" id="jsonuploadfile" type="file" class="" nv-file-select="" uploader="uploader" multiple />
-
-                            </div>
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <div class="panel-heading">上传附件列表
-                                    <!--<a class="btn btn-primary pull-right " style="margin-top:-7px;" ng-click="addAttachment()">-->
-                                         <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-                                          <!--上传附件-->
-                                      <!--</a>-->
-                                </div>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th width="50%">Name</th>
-                                            <th ng-show="uploader.isHTML5">Size</th>
-                                            <th ng-show="uploader.isHTML5">Progress</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="itemfile in uploader.queue">
-                                            <td><strong>[[itemfile.file.name]]</strong></td>
-                                            <td ng-show="uploader.isHTML5" nowrap>[[(itemfile.file.size/1024/1024).toFixed(2)]]MB</td>
-                                            <td ng-show="uploader.isHTML5">
-                                                <div class="progress" style="margin-bottom: 0;">
-                                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': itemfile.progress + '%' }"></div>
-                                                </div>
-                                            </td>
-                                            <td class="text-center">
-                                                <span ng-show="itemfile.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                                                <span ng-show="itemfile.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                                                <span ng-show="itemfile.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                                            </td>
-                                            <td nowrap>
-                                                <button type="button" class="btn btn-success btn-xs" ng-click="itemfile.upload()" ng-disabled="itemfile.isReady || iteitemfile.isUploading || itemfile.isSuccess">
-                                                    <span class="glyphicon glyphicon-upload"></span> Upload
-                                                   </button>
-                                                <button type="button" class="btn btn-warning btn-xs" ng-click="itemfile.cancel()" ng-disabled="!itemfile.isUploading">
-                                                       <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                                                 </button>
-                                                <button type="button" class="btn btn-danger btn-xs" ng-click="itemfile.remove()">
-                                                        <span class="glyphicon glyphicon-trash"></span> Remove
-                                                    </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-
-                            </div>
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <div class="panel panel-success">
-                                    <div class="panel-heading">样品列表
-                                        <!--<a class="btn btn-primary pull-right " style="margin-top:-7px;" ng-click="addSample()">-->
-                                         <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-                                          <!--新增-->
-                                      <!--</a>-->
-                                    </div>
-                                    <table class="table table-striped table-bordered table-condensed table-responsive ">
-                                        <tr class="animated flash">
-                                            <td class="hidden">订单编号</td>
-                                            <td class="hidden">订单编号</td>
-                                            <td>样本编号</td>
-                                            <td>样本类型</td>
-                                            <td>样本数量</td>
-                                            <td>测序平台</td>
-                                            <td>包lane数目</td>
-                                            <td>文库插入片段长度</td>
-                                            <td>是否拆分数据</td>
-                                            <td>样品是否在世和</td>
-                                            <td colspan="3" style="width:60px">操作列</td>
-                                        </tr>
-                                        <tr ng-repeat='iteam in samples'>
-                                            <td class="hidden"> <input type="text" ng-model="iteam.OrderID" /></td>
-                                            <td class="hidden"> <input type="text" ng-model="iteam._id" /></td>
-                                            <!-- <td ng-show='!disabled'><input type="text" ng-model="iteam.SampleID" /></td>
-                                            <td ng-show='!disabled'><input type="text" ng-model="iteam.SampleType" /></td>
-                                            <td ng-show='!disabled'><input type="text" ng-model="iteam.SampleAmmount" /></td>
-                                            <td ng-show='!disabled'><input type="text" ng-model="iteam.Units" /></td> -->
-
-                                            <td>[[iteam.SampleID]]</td>
-                                            <td>[[iteam.SampleType]]</td>
-                                            <td>[[iteam.SampleAmmount]]</td>
-                                            <td>[[iteam.Platform]]</td>
-                                            <td>[[iteam.LaneNumber]]</td>
-                                            <td>[[iteam.PartLength]]</td>
-                                            <td>[[iteam.Split]]</td>
-                                            <td>[[iteam.AtShiHe]]</td>
-                                            <td colspan="3" style="width:220px" ng-disabled="true" nowrap>
-                                                <div class="btn-group" role="group" aria-label="...">
-                                                    <button class="btn btn-primary" ng-click="editSample($index)">编辑</button>
-                                                    <button class="btn btn-primary" ng-click="deleteSample($index)">删除</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                </div>
-
-
-
-                            </div>
-                        </fieldset>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary animated fadeInUp btn-lg" ng-click="operate()">审核</button>
-                            <button class="btn btn-primary btn-lg" onclick="window.location.href='#!/List/orderList'">取消</button>
-                            <!--<a class="btn btn-primary btn-lg" href="#!/orders/printOrder?OrderID=[[OrderID]]">打印</a>-->
-                        </div>
+<div class="container " ng-controller="orderDetailController">
+    <div>
+        <div class="panel panel-success">
+            <div class="panel panel-heading">
+                <h3 class="panel-title">送样信息表基本信息</h3>
+            </div>
+            <div class=" panel-body">
+                <table class="table table-striped table-bordered table-condensed table-responsive animated bounceInDown">
+                    <tr>
+                        <td>送样信息表编号</td>
+                        <td>[[detail.OrderID]]</td>
+                        <td>项目编号</td>
+                        <td>[[detail.ProgrameID]]</td>
+                    </tr>
+                    <tr>
+                        <td>联系人</td>
+                        <td>[[detail.UserName]]</td>
+                        <td>机构</td>
+                        <td>[[detail.InstituionString]]</td>
+                    </tr>
+                    <tr>
+                        <td>收货地址</td>
+                        <td>  [[detail.Address]]</td>
+                        <td>联系电话</td>
+                        <td> [[detail.Phone]]</td>
+                    </tr>
+                    <tr>
+                        <td>测序平台</td>
+                        <td>[[ ["Novaseq 6000 S2（仅包FC）","Hiseq X Ten","Hiseq 4000","Miseq","Nextseq 500","MiniSeq"][detail.Platform] ]]</td>
+                        <td>读长</td>
+                        <td>[[ detail.ReadLength | showReadLine ]]</td>
+                    </tr>
+                    <tr>
+                        <td>送样信息表类型</td>
+                        <td>[[ ["文库无需世和混合，包lane","文库需世和混合上机，包lane","需要世和混合上机，不包lane包G","文库无需世和混合，包FC(flow cell)"][detail.OrderType] ]]</td>
+                        <td  ng-show="detail.OrderType =='0'||detail.OrderType =='1'">包lane数目</td>
+                        <td  ng-show="detail.OrderType =='0'||detail.OrderType =='1'">[[detail.LaneNumber]]</td>
+                        <td  ng-show="detail.OrderType =='2'">包G数目</td>
+                        <td  ng-show="detail.OrderType =='2'">[[detail.GNumber]]</td>
+                    </tr>
+                    <tr>
+                        <td>标签选择</td>
+                        <td>[[  ["单标签","双标签"][detail.MarkType] ]]</td>
+                        <td>文库2100结果</td>
+                        <td>[[   ["已有2100质检结果（请上传2100原始结果附件）","无2100质检结果，需世和做（收费）","无2100质检结果，不需要"][detail.DocmentResult] ]]</td>
+                    </tr>
+                    <tr>
+                        <td>运单号</td>
+                        <td>[[detail.ReceiveWayBill]]</td>
+                        <td>运输方式</td>
+                        <td>[[detail.CarrType]]</td>
+                    </tr>
+                    <tr>
+                        <td>是否携带硬盘</td>
+                        <td>[[ ["是","否"][detail.CarryDisk] ]]</td>
+                        <td>硬盘SN码</td>
+                        <td>[[detail.CarryDiskString]]</td>
+                    </tr>
+                    <tr>
+                        <td>样本总数</td>
+                        <td>[[detail.SampleCount]]</td>
+                        <td>每份样本管数</td>
+                        <td>[[detail.SampleTubeCount]]</td>
+                    </tr>
+                    <tr>
+                        <td>样本说明</td>
+                        <td>[[detail.SampleMemo]]</td>
+                        <td>样本物种</td>
+                        <td>[[detail.SampleSpecies]]</td>
+                    </tr>
+                    <tr>
+                        <td style="min-width:200px;">建库方法</td>
+                        <td colspan="3"  style="word-wrap:break-word; word-break:break-all;" > <p ng-bind-html="detail.BuildFactoryHtmL"></p></td>
+                    </tr>
+                    <tr>
+                        <td >特定序列</td>
+                        <td colspan="3"><p ng-bind-html="detail.SpecificSequenceHtmL"></p></td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td colspan="3"><p ng-bind-html="detail.OrderMemoHtmL"></td>
+                    </tr>
+                </table>
+                 <div class="panel panel-success" >
+                    <div class="panel-heading">样品列表
                     </div>
+                    <table class="table table-striped table-bordered table-condensed table-responsive order-table">
+                        <tr class="animated flash">
+                            <td class="hidden">送样信息表编号</td>
+                            <td class="hidden">送样信息表编号</td>
+                            <td>样本编号</td>
+                            <td>文库类型</td>
+                            <td > [[ ['包lane数量','包lane数量','包G数量','包FC数量'][detail.OrderType] ]]</td>
+                            <td>文库插入片段长度<br />（接头+插入片段长度，2100结果）</td>
+                            <td>
+                                是否拆分数据
+                            </td>
+                            <td>样品是否在世和</td>
+                            <td>摩尔浓度</td>
+                            <td>体积</td>
+                            <td>要求世和加phix比例</td>
+                        </tr>
+                        <tr ng-repeat='iteam in samples track by $index'>
+                            <td >[[iteam.SampleID]]</td>
+                            <td> [[iteam.SampleType]]</td>
+                            <td>[[iteam.SampleAmmount]]</td>
+                            <td>[[iteam.PartLength]]bp</td>
+                            <td >
+                                [[iteam.Split]]
+                            </td>
+                            <td>
+                                [[iteam.AtShiHe]]
+                            </td>
+                            <td>[[iteam.Concentration]]nM</td>
+                            <td>[[iteam.Volume]]μl</td>
+                            <td>[[iteam.Phix]]%</td>
+                            
+                        </tr>
+                    </table>
+                </div> 
+                 <div class="form-group text-right " style=" padding-right:200px;">
+                     签名：
+                </div>
+                <div class="form-group text-right " style=" padding-right:200px;">
+                    日期：
                 </div>
             </div>
         </div>
-       <div id="result-modal-sample" class="modal fade" tabindex="-1" role="dialog">
-            <input type="hidden" ng-model="sampleNumber">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">样本</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row form-horizontal">
-                            <div class="form-group ">
-                                <label class="col-sm-2 control-label text-left" for="SampleID">
-                                                        样本编号
-                                                        </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="SampleID" ng-model="newSample.SampleID" />
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label class="col-sm-2 control-label text-left" for="ProgrameID">
-                                                        样本类型(最多选择3个)
-                                                        </label>
-                                <div class="col-sm-8">
-                                    <!-- <input class="form-control" type="text" id="ProgrameID" ng-model="newSample.SampleType" ng-disabled="!add" /> -->
-                                    <div class="">
-                                        <input class="" type="checkbox" id="" ng-change="checkBox()" ng-disabled="checkBoxDisable[0]" ng-checked="newSample.SampleType.indexOf('1')>=0" ng-model="newSample.SampleType[0]" />
-                                        <span>外显子文库</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="checkbox" id="" ng-change="checkBox()" ng-disabled="checkBoxDisable[1]" ng-checked="newSample.SampleType.indexOf('2')>=0" ng-model="newSample.SampleType[1]" />
-                                        <span>RNAseq</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="checkbox" id="" ng-change="checkBox()" ng-disabled="checkBoxDisable[2]" ng-checked="newSample.SampleType.indexOf('3')>=0" ng-model="newSample.SampleType[2]" />
-                                        <span>小RNA文库</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="checkbox" id="" ng-change="checkBox()" ng-disabled="checkBoxDisable[3]" ng-checked="newSample.SampleType.indexOf('4')>=0" ng-model="newSample.SampleType[3]" />
-                                        <span>扩增子文库</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="checkbox" id="" ng-change="checkBox()" ng-disabled="checkBoxDisable[4]" ng-checked="newSample.SampleType.indexOf('5')>=0" ng-model="newSample.SampleType[4]" />
-                                        <span>CHIP-seq</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="checkbox" id="" ng-change="checkBox()" ng-disabled="checkBoxDisable[5]" ng-checked="newSample.SampleType.indexOf('6')>=0" ng-model="newSample.SampleType[5]" />
-                                        <span>甲基化文库</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="checkbox" id="" ng-change="checkBox()" ng-disabled="checkBoxDisable[6]" ng-checked="newSample.SampleType.indexOf('7')>=0" ng-model="newSample.SampleType[6]" />
-                                        <span>其他</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="OrderType">
-                                                        样本数量
-                                                        </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="OrderType" ng-model="newSample.SampleAmmount">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="Instituion">
-                                                    测序平台
-                                                    </label>
-                                <div class="col-sm-8">
-                                    <div class="">
-                                        <input class="" type="radio" name='Platform' value='Hiseq X Ten' ng-model="newSample.Platform">
-                                        <span>Hiseq X Ten</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="radio" name='Platform' value='Hiseq 4000' ng-model="newSample.Platform">
-                                        <span>Hiseq 4000</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="radio" name='Platform' value='Miseq' ng-model="newSample.Platform">
-                                        <span>Miseq</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="radio" name='Platform' value='Nextseq 500' ng-model="newSample.Platform">
-                                        <span>Nextseq 500</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveAddress">
-                                                        包lane数目
-                                                        </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="LaneNumber" ng-model="newSample.LaneNumber">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveWayBill">
-                                                        文库插入片段长度
-                                                        </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="PartLength" ng-model="newSample.PartLength" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveWayBill">
-                                                        是否拆分数据
-                                                        </label>
-                                <div class="col-sm-8">
-                                    <div class="">
-                                        <input class="" type="radio" name='Split' value='是' ng-model="newSample.Split">
-                                        <span>是</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="radio" name='Split' value='否' ng-model="newSample.Split">
-                                        <span>否</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveWayBill">
-                                                      该样本是否在世和
-                                                       </label>
-                                <div class="col-sm-8">
-                                    <div class="">
-                                        <input class="" type="radio" name='AtShiHe' value='是' ng-model="newSample.AtShiHe">
-                                        <span>是</span>
-                                    </div>
-                                    <div class="">
-                                        <input class="" type="radio" name='AtShiHe' value='否' ng-model="newSample.AtShiHe">
-                                        <span>否</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group text-center">
-                                <button class="btn btn-primary" ng-click='confirmAddSample()'>确认</button>
-                                <button class="btn btn-primary" ng-click='cancleAddSample()'>取消</button>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="ReceiveWayType">
-                                    <jason-pagination conf='paginationConf'></jason-pagination>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-       </div>
-        <div id="result-modal-remark" class="modal fade" tabindex="-1" role="dialog">
-            <input type="hidden" ng-model="index">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">备注</h4>
-                    </div>
-                    <div class="modal-body row">
-                        <div class="col-sm-6">
-                            <label for="">客户反馈</label>
-                            <textarea cols="30" rows="10" ng-model="remark.feedback"></textarea>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="">审核意见</label>
-                            <textarea cols="30" rows="10" ng-model="remark.checksuggestion"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button ng-click="updateLine('/orders/orderPass')">通过</button>
-                        <button ng-click="updateLine('/orders/orderUnapprove')">作废</button>
-                        <button ng-click="hideModel()">取消</button>
-                    </div>
-                </div>
-            </div>
+        
+        <div class="form-group text-center noprint">
+                <a class="btn btn-primary btn-lg" ng-click="print()">打印</a>
         </div>
     </div>
 </div>
