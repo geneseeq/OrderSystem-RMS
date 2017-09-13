@@ -29,7 +29,7 @@ exports.GetOrderLists = function(data, callBack) {
                 });
 
             } else {
-                callBack(false, {result:"查询失败"});
+                callBack(false, {result:[],count:0});
             }
         }.bind(this))
     }
