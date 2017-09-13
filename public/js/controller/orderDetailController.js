@@ -3,10 +3,10 @@
  * 订单明细页面
  */
 
-myApp.controller('orderDetailController', function($scope, FileUploader, $http, $q, $location, $timeout) {;
+myApp.controller('orderDetailController', function($scope, FileUploader, $http, $q, $location, $timeout,$sce) {;
     $scope.detail = { samples: [] }; //orderdetail
     $scope.samples = $scope.detail.samples; //sample lists
- 
+    $scope.uploader={queue:[]};
  
     $scope.sampleNumber = -1;
  
