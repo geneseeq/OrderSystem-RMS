@@ -23,14 +23,14 @@ var transporter = nodemailer.createTransport({
 
 
 // send mail with defined transport object
-module.exports = function(text, toEmail, callback) {
+ var sendMail= function(text, toEmail, callback) {
     var mailOptions = {
         from: 'wei.hu@geneseeq.com', // 发件地址
         to: toEmail, // 收件列表
         subject: '世和基因送样信息表系统邮件通知', // 标题
         //text和html两者只支持一种
         text: '世和基因送样信息表系统', // 标题
-        html: '<b>尊敬的世和基因送样信息表系统用户,您收到的验证码为：' + text + '</b>' // html 内容
+        html: '<b>用户' + text + '</b>' // html 内容
     };
     var result = transporter.sendMail(mailOptions, function(error, info) {
         if (error) {
@@ -38,7 +38,26 @@ module.exports = function(text, toEmail, callback) {
             callback(false);
             return;
         }
-        console.log('Message sent: ' + info.response);
         callback(true);
     });
 }
+var sendMailAttachments= function(text, toEmail, callback, attachments) {
+    var mailOptions = {
+        from: 'wei.hu@geneseeq.com', // 发件地址
+        to: toEmail, // 收件列表
+        subject: '世和基因送样信息表系统邮件通知', // 标题
+        //text和html两者只支持一种
+        text: '世和基因送样信息表系统', // 标题
+        html: '<b>' + text + '</b>', // html 内容
+        attachments: attachments
+    };
+    var result = transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+            console.log(error);
+            callback(false);
+            return;
+        }
+        callback(true);
+    });
+}
+module.exports ={sendMail:sendMail,sendMailAttachments:sendMailAttachments};

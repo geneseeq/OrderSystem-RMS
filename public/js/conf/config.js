@@ -118,28 +118,7 @@ myApp.config(function($routeProvider, $interpolateProvider) {
             pageInit();
         })
     }
-    $scope.updateMass = function (action) {
-        var updataId = [];
-        for(let i=0;i<$scope.datas.length;i++){
-            if($scope.datas[i].checked == true){
-                updataId.push($scope.datas[i]._id)
-            }
-        }
-        var urlconnect = action.indexOf("?") > 0 ? "&" : "?";
-        $http({
-            method:'post',
-            url:action + urlconnect + accesstokenstring,
-            data:{
-                updataId:updataId
-            }
-        }).then(function (data) {
-            $scope.modal.title = "结果";
-            data = data && data.data ? data.data : data;
-            $scope.modal.body = data.msg || data.data;
-            $("#result-modal-base").modal();
-            pageInit();
-        })
-    }
+
 
     function pageInit() {
         if ($scope.paginationConf && $scope.paginationConf.action && $scope.paginationConf.action != "") {
