@@ -13,14 +13,14 @@ var Attachment=require('../../Modles/OrderAttachment.js');
 exports.GetOrderLists = function(data, callBack) {
         let pageSize = data.query.pagesize;
         let pageIndex = data.query.pageindex;
-        let skipnum = pageSize * (pageIndex - 1);
+        let skipnum = pageSize * (pageIndex>1?pageIndex- 1:0);
         let limitnum = parseInt(pageSize);
         let fetchParam = new Order.order(JSON.parse(data.query.f));
-        fetchParam.IsSubmit="1";
         var orderCriteria = {};
         for (var key in fetchParam) {
             fetchParam[key]!==""?orderCriteria[key] = new RegExp(fetchParam[key]):"";
         }
+        orderCriteria["IsSubmit"]={$in:['1','2']} 
         delete orderCriteria.CreateTime;
         Order.fetch(orderCriteria, limitnum, skipnum).then(function(result) {
             if (result && result.length) {
@@ -109,7 +109,7 @@ exports.setOrderUnapprove = function (data,callBack) {
     var OrderPass = data.body.formdata;
     OrderPass.Statues = '2';
     OrderPass.CheckStatus='2';
-    OrderPass.IsSubmit="0";
+    OrderPass.IsSubmit="2";
     OrderPass.CheckUser=CheckUser;
     OrderPass.checkTime= new Date();
     delete OrderPass.CreateTime;

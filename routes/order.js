@@ -64,6 +64,7 @@ router.get('/pdfOrder', function(req, res, next) {
         data.Address=data.AcceptAddressString.split(",")[0];
         data.Phone=data.AcceptAddressString.split(",")[1];
         data.UserName=data.AcceptAddressString.split(",")[2];
+        data.CarrTypeString=['包lane数量','包lane数量','包G数量','包FC数量'][data.CarrType];  
         res.render('Order/pdfOrder', { title: '首页', layout: null,detail:data});
     })
     
