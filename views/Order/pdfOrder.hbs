@@ -32,14 +32,17 @@
                         <tr>
                             <td>联系人</td>
                             <td>{{detail.UserName}}</td>
-                            <td>机构</td>
-                            <td>{{detail.InstituionString}}</td>
+                             <td>联系电话</td>
+                            <td> {{detail.Phone}}</td>
+                            
                         </tr>
                         <tr>
                             <td>收货地址</td>
-                            <td>  {{detail.Address}}</td>
-                            <td>联系电话</td>
-                            <td> {{detail.Phone}}</td>
+                            <td olspan="3">  {{detail.Address}}</td>
+                        </tr>
+                        <tr>
+                            <td>机构</td>
+                            <td olspan="3">{{detail.InstituionString}}</td>
                         </tr>
                         <tr>
                             <td>测序平台</td>
@@ -73,7 +76,7 @@
                         </tr>
                         <tr>
                             <td>是否携带硬盘</td>
-                            <td>{{detail.CarryDiskString}}</td>
+                            <td>{{detail.CarryDiskStringY}}</td>
                             <td>硬盘SN码</td>
                             <td>{{detail.CarryDiskString}}</td>
                         </tr>

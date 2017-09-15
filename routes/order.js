@@ -57,7 +57,8 @@ router.get('/pdfOrder', function(req, res, next) {
         data.OrderTypeString =["文库无需世和混合，包lane","文库需世和混合上机，包lane","需要世和混合上机，不包lane包G","文库无需世和混合，包FC(flow cell)"][ data.OrderType];
         data.MarkTypeString=["单标签","双标签"][data.MarkType];
         data.DocmentResulString=["已有2100质检结果（请上传2100原始结果附件）","无2100质检结果，需世和做（收费）","无2100质检结果，不需要"][data.DocmentResult]
-        data.CarryDiskString=["是","否"][data.CarryDisk];
+        data.CarryDiskStringY=["是","否"][data.CarryDisk];
+        //data.CarryDiskString
         data.OrderTypeCol=['包lane数量','包lane数量','包G数量','包FC数量'][data.OrderType];
         data.isBaoLane=(data.OrderType =='0'||data.OrderType =='1');
         data.isBaoG=(data.OrderType =='2');
