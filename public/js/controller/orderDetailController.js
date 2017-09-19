@@ -35,7 +35,7 @@ myApp.controller('orderDetailController', function($scope, FileUploader, $http, 
             $("#result-modal-remark").modal();
         }
         $scope.check = function(index, action) {
-            $scope.currentData = $scope.$scope.detail;
+            $scope.currentData = $scope.detail;
             $scope.currentData.feedback = $scope.remark.feedback;
             $scope.currentData.checksuggestion = $scope.remark.checksuggestion;
             var urlconnect = action.indexOf("?") > 0 ? "&" : "?";
@@ -50,7 +50,6 @@ myApp.controller('orderDetailController', function($scope, FileUploader, $http, 
                 data = data && data.data ? data.data : data;
                 $scope.modal.body = data.msg || data.data;
                 $("#result-modal-base").modal();
-                pageInit();
             })
         }
    
