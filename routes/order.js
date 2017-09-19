@@ -56,7 +56,7 @@ router.get('/pdfOrder', function(req, res, next) {
         data.ReadLengthString =dir[ data.ReadLength];
         data.OrderTypeString =["文库无需世和混合，包lane","文库需世和混合上机，包lane","需要世和混合上机，不包lane包G","文库无需世和混合，包FC(flow cell)"][ data.OrderType];
         data.MarkTypeString=["单标签","双标签"][data.MarkType];
-        data.DocmentResulString=["已有2100质检结果（请上传2100原始结果附件）","无2100质检结果，需世和做（收费）","无2100质检结果，不需要"][data.DocmentResult]
+        data.DocmentResultString=["已有2100质检结果（请上传2100原始结果附件）","无2100质检结果，需世和做（收费）","无2100质检结果，不需要"][data.DocmentResult]
         data.CarryDiskStringY=["是","否"][data.CarryDisk];
         //data.CarryDiskString
         data.OrderTypeCol=['包lane数量','包lane数量','包G数量','包FC数量'][data.OrderType];
@@ -65,7 +65,8 @@ router.get('/pdfOrder', function(req, res, next) {
         data.Address=data.AcceptAddressString.split(",")[0];
         data.Phone=data.AcceptAddressString.split(",")[1];
         data.UserName=data.AcceptAddressString.split(",")[2];
-        data.CarrTypeString=['包lane数量','包lane数量','包G数量','包FC数量'][data.CarrType];  
+        data.CarrTypeString=['干冰+冰袋','冰袋','液氮','其他'][data.ReceiveWayType]; 
+        data.ReceiveWayType=="3"?data.CarrTypeString=data.ReceiveWayTypeString:""
         res.render('Order/pdfOrder', { title: '首页', layout: null,detail:data});
     })
     
