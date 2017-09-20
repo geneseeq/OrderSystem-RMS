@@ -35,10 +35,10 @@ app.use(session({
     store: new MongoStore({   //创建新的mongodb数据库
         host: '127.0.0.1',    //数据库的地址，本机的话就是127.0.0.1，也可以是网络主机
         port: 27017,          //数据库的端口号
-        url: 'mongodb://127.0.0.1:27017/orderSystem'  ,
+        url:'mongodb://geneorderuser:sk39xk2si@120.55.161.104:27017/orderSystem'  ,
         db: 'orderSystem',        //数据库的名称。
         cookieSecret: 'orderSystem',
-        mongodb: "mongodb://127.0.0.1:27017/orderSystem"
+        mongodb:'mongodb://geneorderuser:sk39xk2si@120.55.161.104:27017/orderSystem'  ,
      })
 }));
 app.use(express.static(path.join(__dirname, 'public')));
