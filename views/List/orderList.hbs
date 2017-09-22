@@ -136,13 +136,13 @@
                     <textarea cols="30" rows="10" ng-model="remark.feedback"></textarea>
                 </div>
                 <div class="col-sm-6">
-                    <label for="">审核意见</label>
+                    <label for="">意见</label>
                     <textarea cols="30" rows="10" ng-model="remark.checksuggestion"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button ng-click="updateLine(index,'/orders/orderPass')">通过</button>
-                <button ng-click="updateLine(index,'/orders/orderUnapprove')">作废</button>
+                <button ng-click="updateLine(index,'/orders/orderPass')">查看</button>
+                <button ng-click="updateLine(index,'/orders/orderUnapprove')">信息不全</button>
                 <button ng-click="hideModel()">取消</button>
             </div>
         </div>
