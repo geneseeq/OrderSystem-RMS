@@ -91,7 +91,7 @@
                         <td>审核状态</td>
                         <td colspan="3" style="width:220px">操作列</td>
                     </tr>
-                    <tr ng-repeat='iteam in datas|orderBy:"Statues"'>
+                    <tr ng-repeat="iteam in datas">
                         <!--<td style="text-align: center">-->
                             <!--<input type="checkbox" ng-value="iteam._id" ng-checked="all" ng-model="iteam.checked">-->
                         <!--</td>-->
@@ -112,8 +112,6 @@
 
                 </table>
                 <div style="text-align: center;">
-                    <!--<button class="btn btn-info" ng-click="updateMass('/orders/orderPassMass')">批量通过</button>-->
-                    <!--<button class="btn btn-warning" ng-click="updateMass('/orders/orderUnapprovMass')">批量作废</button>-->
                 </div>
                 <jason-pagination conf='paginationConf'></jason-pagination>
             </div>
