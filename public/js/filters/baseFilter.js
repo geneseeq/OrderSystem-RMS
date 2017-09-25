@@ -5,10 +5,14 @@ myApp.filter('sordertype', (function() {
         return inputArray[inputValue];
     }
 })).filter('status', (function() {
-    var inputArray = ["未审核", "已审核"];
-    return function(inputValue) {
-        $.isEmptyObject(inputValue)?inputValue=="0":"";
-        return inputArray[inputValue];
+    var inputArray = ["已送达，待阅","已阅，信息完整","已阅，信息不全，需补充"];
+    return function(inputValue,savestatus) {
+        if(savestatus!="0"){
+            inputValue==""?inputValue=="0":"";
+            return inputArray[inputValue];
+        }else{
+            return "已暂存";
+        }
     }
 })).filter('showName',function(){ 
     
