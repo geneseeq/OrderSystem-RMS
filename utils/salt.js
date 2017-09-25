@@ -18,7 +18,7 @@ const md5 = (text) => {
     return crypto.createHash("md5").update(String(text)).digest("hex");
 };
 const encrypt = (password, saltString) => {
-    return md5(md5(password) + salt);
+    return md5(md5(password) + saltString);
 };
 exports.salt = salt;
 exports.encrypt = encrypt;
